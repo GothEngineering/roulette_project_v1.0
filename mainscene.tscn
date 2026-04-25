@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://bevis8uoimewd"]
+
+[ext_resource type="Script" uid="uid://cs3c037agpss3" path="res://ruletarusa.gd" id="1_wtdyi"]
+[ext_resource type="PackedScene" uid="uid://b20x7jhe848sq" path="res://your_blood.tscn" id="2_5lfti"]
+[ext_resource type="Script" uid="uid://c7xu16xfktvk8" path="res://rounds_counter.gd" id="2_dn5c8"]
+[ext_resource type="Texture2D" uid="uid://ckj5lg11tsvs7" path="res://assets/revolvercylinder.png" id="2_xtb1e"]
+[ext_resource type="FontFile" uid="uid://q01jknyoh0o7" path="res://fonts/PixelOperator8.ttf" id="5_76yo1"]
+[ext_resource type="Script" uid="uid://d4jqepr0vgx4s" path="res://bulletshud.gd" id="5_fl65m"]
+[ext_resource type="Texture2D" uid="uid://clm6ne5cc6jyg" path="res://assets/BulletIcon.png" id="5_sbvtr"]
+[ext_resource type="FontFile" uid="uid://dot26ai7w8tov" path="res://fonts/PixelOperator8-Bold.ttf" id="6_4ofsq"]
+[ext_resource type="AudioStream" uid="uid://d2vmutbpex2hv" path="res://sounds/revolver_gunshot.wav" id="8_0ibrq"]
+[ext_resource type="AudioStream" uid="uid://dt3jbd6r22fei" path="res://sounds/empty_click.wav" id="9_0ibrq"]
+[ext_resource type="AudioStream" uid="uid://3if28b060ohg" path="res://sounds/revolver_small_spin.wav" id="10_0ibrq"]
+[ext_resource type="AudioStream" uid="uid://btn654eb1t8ji" path="res://sounds/revolver_long_spin.wav" id="11_4ofsq"]
+[ext_resource type="AudioStream" uid="uid://dkmn4cmhcpmcw" path="res://sounds/roulette_trim.wav" id="13_4p23x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbvtr"]
+atlas = ExtResource("5_sbvtr")
+region = Rect2(36, 21, 11, 31)
+
+[node name="MainScene" type="Node2D" unique_id=1124980480]
+script = ExtResource("1_wtdyi")
+blood_splatter_scene = ExtResource("2_5lfti")
+
+[node name="BloodBank" type="Node2D" parent="." unique_id=1388399947]
+
+[node name="RoundsCounter" type="Node" parent="." unique_id=1112150199]
+unique_name_in_owner = true
+script = ExtResource("2_dn5c8")
+
+[node name="High Score" type="Label" parent="RoundsCounter" unique_id=2073211660]
+offset_left = -564.0
+offset_top = -312.0
+offset_right = -155.0
+offset_bottom = -250.0
+theme_override_fonts/font = ExtResource("5_76yo1")
+theme_override_font_sizes/font_size = 26
+text = "Times cheated death: 0"
+autowrap_mode = 2
+
+[node name="Kill Count" type="Label" parent="RoundsCounter" unique_id=98727441]
+visible = false
+offset_left = -564.0
+offset_top = -230.0
+offset_right = -200.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("5_76yo1")
+theme_override_font_sizes/font_size = 26
+text = "Brains blew out: 1"
+autowrap_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1649251837]
+
+[node name="RevolverCylinder" type="Sprite2D" parent="." unique_id=313346623]
+texture = ExtResource("2_xtb1e")
+
+[node name="This Way Is Up" type="Label" parent="RevolverCylinder" unique_id=2095489819]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -208.0
+offset_right = -79.0
+offset_bottom = -185.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Up!"
+horizontal_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1030066192]
+process_mode = 3
+
+[node name="Instructions" type="Label" parent="CanvasLayer" unique_id=872343545]
+offset_left = 322.0
+offset_top = 21.0
+offset_right = 831.0
+offset_bottom = 246.0
+theme_override_fonts/font = ExtResource("5_76yo1")
+text = "Left mouse/Space Bar to spin the revolver
+
+Right mouse to pull the trigger
+
+Reload with \"R\", you can't unload the chamber
+
+Press \"B\" for Blood Mode
+
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="OneMoreGame" type="Label" parent="CanvasLayer" unique_id=1733055761]
+visible = false
+offset_left = 438.0
+offset_top = 50.0
+offset_right = 716.0
+offset_bottom = 168.0
+theme_override_fonts/font = ExtResource("6_4ofsq")
+text = "Reload with \"R\""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DarknessMyFriend" type="ColorRect" parent="CanvasLayer" unique_id=711273093]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06879826, 0.06879829, 0.068798244, 1)
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/DarknessMyFriend" unique_id=570969573]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = 135.0
+offset_right = 53.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[node name="Grit" type="Label" parent="CanvasLayer" unique_id=1858867328]
+visible = false
+offset_left = 516.0
+offset_top = 305.0
+offset_right = 635.0
+offset_bottom = 339.0
+theme_override_font_sizes/font_size = 24
+text = "Bad luck..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BulletsContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=241411485]
+layout_direction = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1195.0
+offset_top = -130.0
+offset_right = -835.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = -84
+script = ExtResource("5_fl65m")
+
+[node name="Bullet0" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=975534940]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bullet1" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=1202174822]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bullet2" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=161500826]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bullet3" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=1806957920]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bullet4" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=2128397084]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bullet5" type="TextureRect" parent="CanvasLayer/BulletsContainer" unique_id=1275205905]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = SubResource("AtlasTexture_sbvtr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BANG!!!" type="AudioStreamPlayer" parent="." unique_id=1463717247]
+stream = ExtResource("8_0ibrq")
+
+[node name="EmptyChamber" type="AudioStreamPlayer" parent="." unique_id=1660982284]
+stream = ExtResource("9_0ibrq")
+
+[node name="ShortSpin" type="AudioStreamPlayer" parent="." unique_id=138151822]
+stream = ExtResource("10_0ibrq")
+volume_db = 1.0
+pitch_scale = 1.2
+
+[node name="LongSpin" type="AudioStreamPlayer" parent="." unique_id=164863844]
+stream = ExtResource("11_4ofsq")
+
+[node name="Hesitant" type="AudioStreamPlayer" parent="." unique_id=434421035]
+stream = ExtResource("13_4p23x")
+volume_db = 1.0
+
+[node name="SpinTimer" type="Timer" parent="." unique_id=1301129708]
+wait_time = 0.9
+one_shot = true
+
+[node name="HesitantWait" type="Timer" parent="." unique_id=501921338]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="bullet_used" from="." to="CanvasLayer/BulletsContainer" method="_on_main_scene_bullet_used"]
+[connection signal="pressed" from="CanvasLayer/DarknessMyFriend/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]
